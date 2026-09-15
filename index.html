@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>传染病与肝病流行病学知识库 v2.0 · 博士快速入门</title>
+<style>
+  :root{
+    --bg:#f3f6f8; --card:#ffffff; --ink:#1f2733; --muted:#5c6b7a;
+    --blue:#1668a8; --blue-l:#e8f1f8; --teal:#0e8a72; --teal-l:#e5f5f1;
+    --amber:#b06a1d; --amber-l:#faf0e2; --red:#b3402f; --red-l:#f9eae7;
+    --line:#dbe3ea; --nav-w:272px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,-apple-system,sans-serif;line-height:1.75;font-size:15px}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  header.top{background:linear-gradient(135deg,#0f2c3d 0%,#14507a 100%);color:#fff;padding:22px 26px 16px}
+  header.top h1{margin:0 0 6px;font-size:22px;line-height:1.4}
+  header.top .sub{font-size:13.5px;opacity:.92}
+  header.top .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:1px 10px;font-size:12px;margin-left:8px;vertical-align:middle}
+  .wrap{display:flex;align-items:flex-start;gap:0}
+  nav#toc{width:var(--nav-w);flex:0 0 var(--nav-w);position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--card);border-right:1px solid var(--line);padding:14px 12px 30px}
+  nav#toc .toc-title{font-weight:700;font-size:14px;color:var(--blue);margin:10px 2px 6px}
+  nav#toc input#tocFilter{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;margin-bottom:8px}
+  nav#toc ul{list-style:none;margin:0;padding:0}
+  nav#toc li.grp{font-size:12.5px;font-weight:700;color:var(--teal);margin:12px 2px 4px;letter-spacing:.5px}
+  nav#toc li a{display:block;padding:4px 8px;border-radius:6px;font-size:13px;color:#34424f;border-left:3px solid transparent}
+  nav#toc li a:hover{background:var(--blue-l);text-decoration:none}
+  nav#toc li a.on{background:var(--blue-l);border-left-color:var(--blue);color:var(--blue);font-weight:600}
+  main{flex:1;min-width:0;padding:22px 30px 80px;max-width:980px}
+  main article{background:var(--card);border-radius:12px;padding:26px 34px;box-shadow:0 1px 4px rgba(16,24,40,.06)}
+  h2.sec{font-size:20px;color:var(--blue);border-bottom:2px solid var(--blue-l);padding-bottom:8px;margin:40px 0 14px;scroll-margin-top:20px}
+  h2.sec:first-of-type{margin-top:6px}
+  h3{font-size:16.5px;color:var(--teal);margin:26px 0 8px}
+  h4{font-size:15px;color:#34424f;margin:18px 0 6px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0;padding-left:24px}
+  li{margin:4px 0}
+  .tag{display:inline-block;font-size:12px;border-radius:4px;padding:0 7px;margin-right:6px;vertical-align:1px}
+  .tag.v{background:var(--teal-l);color:var(--teal)}
+  .tag.r{background:var(--amber-l);color:var(--amber)}
+  .tag.w{background:var(--red-l);color:var(--red)}
+  .box{border-radius:10px;padding:12px 16px;margin:14px 0}
+  .box.b{background:var(--blue-l);border-left:4px solid var(--blue)}
+  .box.t{background:var(--teal-l);border-left:4px solid var(--teal)}
+  .box.a{background:var(--amber-l);border-left:4px solid var(--amber)}
+  .box.w{background:var(--red-l);border-left:4px solid var(--red)}
+  .box .bt{font-weight:700;margin-bottom:4px}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+  th{background:#f0f5f9;color:#2c3a49;font-weight:600}
+  tr:nth-child(even) td{background:#fafcfe}
+  code{background:#eef2f6;border-radius:4px;padding:1px 6px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#0f5a8a}
+  .formula{background:#f7f9fb;border:1px dashed var(--line);border-radius:8px;padding:8px 14px;font-family:Consolas,"Courier New",monospace;font-size:13.5px;margin:8px 0;color:#123}
+  .note-src{font-size:12.5px;color:var(--muted)}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+  .flow .node{background:var(--blue-l);border:1px solid #c3d9ea;color:#0f3c5e;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600}
+  .flow .node.t{background:var(--teal-l);border-color:#b6ddd3;color:#0b5c4c}
+  .flow .node.a{background:var(--amber-l);border-color:#e5c9a2;color:#7c4a12}
+  .flow .node.r{background:var(--red-l);border-color:#e4bfb7;color:#8c3325}
+  .flow .arr{color:var(--blue);font-weight:700;font-size:14px}
+  .flow .lab{font-size:12px;color:var(--muted)}
+  .chk{float:right;font-size:12.5px;color:var(--muted);font-weight:400;cursor:pointer;user-select:none}
+  .chk.done{color:var(--teal)}
+  .tools{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;gap:8px}
+  .tools .btn{background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 8px rgba(16,24,40,.12);padding:9px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .tools .btn:hover{border-color:var(--blue);color:var(--blue)}
+  #selbar{position:fixed;z-index:70;display:none;background:var(--blue);color:#fff;border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;box-shadow:0 2px 10px rgba(16,24,40,.25)}
+  #selbar:hover{background:#14507a}
+  .mark{border-radius:3px;cursor:pointer;padding:0 1px}
+  .mark.c1{background:#ffe89c}.mark.c2{background:#b8e6cf}.mark.c3{background:#cfe3fb}.mark.c4{background:#f8c9d4}
+  #modal{position:fixed;inset:0;background:rgba(15,30,45,.45);display:none;z-index:80;align-items:center;justify-content:center;padding:20px}
+  #modal .card{background:#fff;border-radius:12px;width:100%;max-width:460px;padding:18px 20px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+  #modal h3{margin:0 0 10px;font-size:16px;color:var(--blue)}
+  #modal .q{font-size:13.5px;color:#34424f;background:#f5f8fa;border-radius:8px;padding:8px 12px;margin-bottom:10px;max-height:90px;overflow:auto}
+  #modal textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;font-family:inherit;resize:vertical}
+  #modal .cols{display:flex;gap:8px;margin:10px 0}
+  #modal .col{flex:1;text-align:center;border:2px solid var(--line);border-radius:8px;padding:8px 4px;font-size:12.5px;cursor:pointer}
+  #modal .col.on{border-color:var(--blue);background:var(--blue-l)}
+  #modal .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+  #modal .btns button{border:none;border-radius:8px;padding:8px 16px;font-size:13.5px;cursor:pointer}
+  #modal .save{background:var(--blue);color:#fff}
+  #modal .cancel{background:#eef2f6;color:#334}
+  #panel{position:fixed;right:0;top:0;bottom:0;width:340px;max-width:92vw;background:#fff;z-index:75;box-shadow:-4px 0 20px rgba(16,24,40,.18);display:none;flex-direction:column}
+  #panel.on{display:flex}
+  #panel .ph{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line);font-weight:700;color:var(--blue)}
+  #panel .ph button{border:none;background:none;font-size:20px;cursor:pointer;color:var(--muted)}
+  #panel .pl{flex:1;overflow-y:auto;padding:12px 14px}
+  .anno-item{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  .anno-item .sec{font-size:11.5px;color:var(--muted)}
+  .anno-item .q{font-size:13px;background:#f5f8fa;border-radius:6px;padding:6px 8px;margin:6px 0}
+  .anno-item .note{font-size:13.5px;color:#233;margin:4px 0}
+  .anno-item .ops{display:flex;gap:8px;margin-top:6px}
+  .anno-item .ops button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer}
+  .anno-item .ops button:hover{border-color:var(--blue);color:var(--blue)}
+  #popover{position:fixed;z-index:85;background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(16,24,40,.25);padding:10px 14px;width:300px;max-width:80vw;display:none}
+  #popover .ps{font-size:11.5px;color:var(--muted)}
+  #popover .pq{font-size:12.5px;color:#34424f;background:#f5f8fa;border-radius:6px;padding:4px 8px;margin:6px 0}
+  #popover .pn{font-size:13.5px;margin:4px 0}
+  #popover .pops{display:flex;gap:8px;margin-top:8px}
+  #popover .pops button{border:1px solid var(--line);background:#fff;border-radius:6px;padding:3px 10px;font-size:12px;cursor:pointer}
+  .progressline{font-size:13px;color:var(--muted);margin:2px 0 10px}
+  .progressline b{color:var(--blue)}
+  .toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#1c2b39;color:#fff;border-radius:999px;padding:8px 20px;font-size:13.5px;z-index:99;opacity:0;transition:opacity .25s;pointer-events:none}
+  .toast.on{opacity:1}
+  .ref{font-size:13px;margin:6px 0;word-break:break-all}
+  .ref b{color:var(--teal)}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;padding:20px}
+  @media (max-width:900px){
+    .wrap{flex-direction:column}
+    nav#toc{width:100%;flex:none;position:static;height:auto;max-height:260px;border-right:none;border-bottom:1px solid var(--line)}
+    main{padding:14px 12px 80px}
+    main article{padding:18px 16px}
+    header.top h1{font-size:18px}
+    .tools{right:10px;bottom:10px}
+    .tools .btn{padding:8px 11px;font-size:12px}
+  }
+  @media print{
+    nav#toc,.tools,#selbar,#panel,#modal,#popover,.chk{display:none!important}
+    body{background:#fff}
+    main{padding:0;max-width:none}
+    main article{box-shadow:none;padding:0}
+    h2.sec{page-break-before:always}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>传染病与肝病流行病学知识库 <span class="badge">v2.0 · 博士快速入门版</span></h1>
+  <div class="sub">传染病流行病学基础 → 肝病流行病学纵深：面向博士研究生的领域入门与进阶工具箱。覆盖基本概念、真实数据、研究方法与无创评估工具详解；支持<b>选中批注</b>、<b>学习进度</b>、<b>目录检索</b>与<b>批注导出/导入</b>。全部数据标注来源与年份，引用前请回到原始文献核验。</div>
+</header>
+<div class="wrap">
+<nav id="toc">
+  <div class="toc-title">目录 · 检索</div>
+  <input id="tocFilter" type="text" placeholder="输入关键词筛选章节，如：乙肝 / 无创 / 队列" oninput="filterToc(this.value)">
+  <ul id="tocList">
+    <li class="grp">第一部分 · 传染病流行病学基础</li>
+    <li><a href="#s1-1" class="p1">1.1 什么是流行病学</a></li>
+    <li><a href="#s1-2" class="p1">1.2 传染病及其基本特征</a></li>
+    <li><a href="#s1-3" class="p1">1.3 流行过程：三环节与两因素</a></li>
+    <li><a href="#s1-4" class="p1">1.4 基本再生数 R₀ 与群体免疫</a></li>
+    <li><a href="#s1-5" class="p1">1.5 自然史与三级预防</a></li>
+    <li><a href="#s1-6" class="p1">1.6 测量指标与疾病负担</a></li>
+    <li><a href="#s1-7" class="p1">1.7 暴发调查</a></li>
+    <li><a href="#s1-8" class="p1">1.8 疾病监测</a></li>
+    <li><a href="#s1-9" class="p1">1.9 研究设计：问出好问题</a></li>
+    <li><a href="#s1-10" class="p1">1.10 预防与控制</a></li>
+    <li><a href="#s1-11" class="p1">1.11 现代趋势：分子流行病学与AI</a></li>
+    <li class="grp">第二部分 · 肝病流行病学（纵深）</li>
+    <li><a href="#s2-1" class="p2">2.1 肝病流行病学总览</a></li>
+    <li><a href="#s2-2" class="p2">2.2 病毒性肝炎家族</a></li>
+    <li><a href="#s2-3" class="p2">2.3 乙型肝炎流行病学（重点）</a></li>
+    <li><a href="#s2-4" class="p2">2.4 丙型肝炎流行病学</a></li>
+    <li><a href="#s2-5" class="p2">2.5 肝癌流行病学</a></li>
+    <li><a href="#s2-6" class="p2">2.6 肝硬化流行病学</a></li>
+    <li><a href="#s2-7" class="p2">2.7 无创评估工具（NITs）详解</a></li>
+    <li><a href="#s2-8" class="p2">2.8 代谢相关脂肪性肝病（MASLD）</a></li>
+    <li><a href="#s2-9" class="p2">2.9 酒精性肝病（ALD）</a></li>
+    <li><a href="#s2-10" class="p2">2.10 研究方法要点（博士进阶）</a></li>
+    <li><a href="#s2-11" class="p2">2.11 消除病毒性肝炎：全球目标与中国行动</a></li>
+    <li class="grp">第三部分 · 工具与延伸</li>
+    <li><a href="#s3-1" class="p3">3.1 中英对照术语表</a></li>
+    <li><a href="#s3-2" class="p3">3.2 研究起步路线图</a></li>
+    <li><a href="#s3-3" class="p3">3.3 参考文献与来源</a></li>
+    <li><a href="#s3-4" class="p3">3.4 更新日志</a></li>
+  </ul>
+</nav>
+<main>
+<article id="content">
+<div class="progressline">学习进度：<b id="progNow">0</b> / <span id="progAll">26</span> 节已学 <span id="progPct">(0%)</span></div>
+
+<h2 class="sec" id="s1-1">1.1 什么是流行病学<span class="chk" data-sec="s1-1">□ 已学</span></h2>
+<p>流行病学（epidemiology）是研究<b>疾病和健康状态在特定人群中的分布及其决定因素</b>，并据此制定和评价防治对策与措施的科学。它与临床医学的根本区别在于观察单位：临床医生面对的是"一个病人"，流行病学家面对的是"一群人的发病模式"。</p>
+<ul>
+  <li><b>三要素</b>：分布（谁、何时、何地发病）→ 决定因素（为什么这些人发病）→ 对策（如何干预并评价效果）。</li>
+  <li><b>描述流行病学</b>回答"是什么样"（描述分布）；<b>分析流行病学</b>回答"为什么"（检验病因假设）；<b>实验流行病学</b>回答"干预有没有效"。</li>
+  <li><b>与肝病研究的关联</b>：肝病流行病学就是用这套框架研究肝脏疾病的负担、危险因素（HBV/HCV、酒精、代谢因素、遗传）、自然史与干预效果——例如"为什么中国肝癌发病率高于欧美"就是一个典型的分布与决定因素问题。</li>
+</ul>
+<div class="box b"><div class="bt">📌 博士视角：流行病学思维的三条铁律</div>
+1) <b>人群不是个体的加总</b>：群体层面的关联（如吸烟与肺癌OR）不能直接外推到个体；2) <b>一切数字都有口径</b>：分母是什么人群、分子是什么定义、时间窗是什么，决定了数字的可比性；3) <b>关联≠因果</b>：判断因果需要Bradford Hill准则（时间先后、强度、剂量反应、一致性、特异性、生物学合理性、可逆性、类比、实验证据），以及严谨的研究设计。</div>
+
+<h2 class="sec" id="s1-2">1.2 传染病及其基本特征<span class="chk" data-sec="s1-2">□ 已学</span></h2>
+<p>传染病（infectious disease）是由病原体（细菌、病毒、真菌、寄生虫、朊病毒）引起、能在人与人、动物与人之间传播的疾病。基本特征：</p>
+<ol>
+  <li><b>有病原体</b>：每种传染病都有特异的病原体。</li>
+  <li><b>有传染性</b>：能在宿主间传播，是区别于非传染病的核心。</li>
+  <li><b>有流行病学特征</b>：呈时间（季节性/周期性）、地区、人群分布。</li>
+  <li><b>感染后免疫</b>：病后或隐性感染后产生特异性免疫（乙肝感染后多数获终身免疫；丙肝可重复感染）。</li>
+</ol>
+<p><b>冰山现象（iceberg phenomenon）</b>：显性感染只是冰山一角，隐性感染、亚临床感染、病原携带状态是水面下的主体——这决定了传染病防控不能只看"发病人数"，还要看感染率与携带率。这正是病毒性肝炎防控的核心：HBV感染者中大部分是无症状携带者。</p>
+<svg viewBox="0 0 560 260" role="img" aria-label="冰山现象示意图" style="width:100%;max-width:560px;height:auto;margin:8px auto;display:block">
+  <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe3fb"/><stop offset="1" stop-color="#9cc6ec"/></linearGradient></defs>
+  <rect x="0" y="130" width="560" height="130" fill="url(#sea)"/>
+  <polygon points="250,60 310,60 330,140 230,140" fill="#f8fafc" stroke="#a9c4dc"/>
+  <polygon points="230,140 330,140 400,240 160,240" fill="#d8e6f3" stroke="#a9c4dc"/>
+  <text x="280" y="118" text-anchor="middle" font-size="13" fill="#1668a8">显性感染（水面之上）</text>
+  <text x="280" y="200" text-anchor="middle" font-size="13" fill="#0f3c5e">隐性感染 · 病原携带 · 亚临床</text>
+  <text x="280" y="222" text-anchor="middle" font-size="12" fill="#0f3c5e">（水面之下：冰山的主体）</text>
+  <text x="280" y="22" text-anchor="middle" font-size="14" fill="#34424f" font-weight="bold">冰山现象：传染病的"全貌"远大于报告病例</text>
+</svg>
+
+<h2 class="sec" id="s1-3">1.3 流行过程：三环节与两因素<span class="chk" data-sec="s1-3">□ 已学</span></h2>
+<p>传染病在人群中传播的机制由<b>传染源—传播途径—易感人群</b>三个环节构成，任一环节被切断即可阻断传播；<b>自然因素与社会因素</b>影响各环节。</p>
+<ul>
+  <li><b>传染源</b>：病人、病原携带者（乙肝携带者是最典型例子）、受感染的动物。</li>
+  <li><b>传播途径</b>：经呼吸道（飞沫/气溶胶）、消化道（粪口）、血液体液（HBV/HCV——经血、母婴、性传播）、虫媒、接触等。乙肝不会经日常接触、共餐传播，这是公众认知纠偏的重点。</li>
+  <li><b>易感人群</b>：无免疫力人群。疫苗接种就是把易感者转为免疫者。</li>
+</ul>
+<svg viewBox="0 0 560 190" role="img" aria-label="流行病学三角示意图" style="width:100%;max-width:560px;height:auto;margin:8px auto;display:block">
+  <polygon points="280,34 90,168 470,168" fill="none" stroke="#1668a8" stroke-width="2.5"/>
+  <text x="280" y="60" text-anchor="middle" font-size="14" fill="#1668a8" font-weight="bold">宿主 Host</text>
+  <text x="280" y="80" text-anchor="middle" font-size="11" fill="#5c6b7a">易感性 · 免疫 · 遗传 · 行为</text>
+  <text x="120" y="158" text-anchor="middle" font-size="13" fill="#0e8a72" font-weight="bold">病原体 Agent</text>
+  <text x="120" y="178" text-anchor="middle" font-size="11" fill="#5c6b7a">毒力 · 传染性 · 变异</text>
+  <text x="440" y="158" text-anchor="middle" font-size="13" fill="#b06a1d" font-weight="bold">环境 Environment</text>
+  <text x="440" y="178" text-anchor="middle" font-size="11" fill="#5c6b7a">自然 · 社会 · 卫生条件</text>
+  <text x="280" y="118" text-anchor="middle" font-size="11" fill="#34424f">任一环节改变 → 流行状态改变</text>
+</svg>
+<div class="box t"><div class="bt">🔬 肝病关联：切断环节的典型案例</div>乙肝母婴传播是"母婴—血液/产道—新生儿"三环节链：新生儿出生24h内接种疫苗+乙肝免疫球蛋白（HBIG）＝切断易感环节，阻断成功率&gt;90%，是中国儿童乙肝感染率骤降的根本机制。</div>
+
+<h2 class="sec" id="s1-4">1.4 基本再生数 R₀ 与群体免疫<span class="chk" data-sec="s1-4">□ 已学</span></h2>
+<p><b>基本再生数 R₀</b>（basic reproduction number）：在完全易感人群中，一个感染者平均传播给多少人。R₀&gt;1 疫情可扩散；R₀&lt;1 疫情衰减。群体免疫阈值 = 1 − 1/R₀。</p>
+<table>
+  <tr><th>疾病/病原</th><th>R₀ 参考区间</th><th>群体免疫阈值（估算）</th></tr>
+  <tr><td>麻疹</td><td>12–18</td><td>92–94%</td></tr>
+  <tr><td>百日咳</td><td>12–17</td><td>92–94%</td></tr>
+  <tr><td>天花</td><td>5–7</td><td>80–86%</td></tr>
+  <tr><td>HIV</td><td>2–5</td><td>50–80%</td></tr>
+  <tr><td>新冠病毒（原始株）</td><td>2.5–3</td><td>60–67%</td></tr>
+  <tr><td>流感</td><td>1.3–1.5</td><td>23–33%</td></tr>
+  <tr><td>甲肝（HAV）</td><td>1.1–3.7</td><td>—</td></tr>
+  <tr><td>乙肝（HBV）</td><td>1.5–2.5</td><td>—</td></tr>
+  <tr><td>丙肝（HCV）</td><td>1–2</td><td>—</td></tr>
+</table>
+<div class="box a"><div class="bt">⚠️ 博士视角：R₀是"环境参数"而非病原体常数</div>R₀取决于传播途径、人群接触模式、卫生条件等——同样一种病原体，在拥挤环境下R₀更高。乙肝R₀&lt;2.5意味着：通过疫苗接种把易感比例压到40%以下即可阻断传播，这正是"新生儿普种疫苗"能近乎消灭儿童新发的数学依据。<b>注意</b>：病毒性肝炎的"有效再生数"受慢性携带者的长潜伏期影响，用"感染人数/代际时间"框架时要小心定义。</div>
+
+<h2 class="sec" id="s1-5">1.5 疾病自然史与三级预防<span class="chk" data-sec="s1-5">□ 已学</span></h2>
+<p><b>自然史</b>（natural history）：不干预情况下疾病从易感、潜伏/潜伏期、亚临床、临床、结局（痊愈/慢性/残疾/死亡）的完整过程。流行病学用自然史确定干预"窗口"。</p>
+<div class="flow">
+  <span class="node">易感</span><span class="arr">→</span>
+  <span class="node">感染</span><span class="arr">→</span>
+  <span class="node">潜伏期</span><span class="arr">→</span>
+  <span class="node">亚临床/携带</span><span class="arr">→</span>
+  <span class="node">临床期</span><span class="arr">→</span>
+  <span class="node">结局</span>
+</div>
+<ul>
+  <li><b>一级预防（病因预防）</b>：疫苗接种、健康行为（限酒、减肥）、消除危险因素——乙肝疫苗是最成功的一级预防。</li>
+  <li><b>二级预防（早发现早治疗）</b>：筛查与早期诊断——丙肝抗体筛查、肝癌高危人群超声+AFP监测。</li>
+  <li><b>三级预防（防伤残防死亡）</b>：规范治疗与康复——DAA抗病毒、肝硬化并发症管理、肝癌综合治疗。</li>
+</ul>
+<div class="box b"><div class="bt">🔬 肝病案例：HBV感染的"自然史五期"（博士需掌握）</div>
+免疫耐受期 → 免疫清除期（e抗原阳性慢性肝炎）→ 非活动携带期 → 再活动期 → 肝硬化/肝癌。各期病毒载量、ALT、肝组织学与传染性不同；流行病学研究据此定义"慢性乙肝（CHB）"的病例标准（HBsAg阳性≥6个月，并区分eAg阳性/阴性），并以此计算治疗覆盖率。</div>
+
+<h2 class="sec" id="s1-6">1.6 测量指标与疾病负担<span class="chk" data-sec="s1-6">□ 已学</span></h2>
+<h3>频率测量</h3>
+<ul>
+  <li><b>发病率</b>（incidence rate）：某人群一定时期内新发病例数/人时；反映新发风险与传播速度。</li>
+  <li><b>患病率</b>（prevalence）：某时点/时期现有病例数/人口数；反映慢性负担（乙肝携带率、脂肪肝患病率都是患病率）。</li>
+  <li><b>死亡率/病死率</b>：死亡数/人口（或病例数）。</li>
+</ul>
+<h3>疾病负担</h3>
+<ul>
+  <li><b>DALY</b>（伤残调整生命年）＝ YLL（因早死损失的生命年）＋ YLD（因伤残损失的生命年）。</li>
+  <li><b>GBD研究</b>（全球疾病负担研究，IHME）：把全球所有疾病的DALY、死亡、患病统一测算，是肝病负担数据的首要来源之一。</li>
+</ul>
+<div class="box t"><div class="bt">📌 博士视角：读肝病负担数据的三问</div>
+1) <b>指标口径</b>：HBsAg阳性率（现症感染）≠ 慢性乙肝（CHB，需肝功能异常）≠ 病毒性肝炎死亡（含肝癌/肝硬化归因）；2) <b>分母与年龄标化</b>：老年化会让粗率失真，务必看年龄标化率（ASR）；3) <b>归因方法</b>：肝癌死亡中"归因于HBV的比例"来自病因学分数（PAF）估算，不同研究差异很大。</div>
+
+<h2 class="sec" id="s1-7">1.7 暴发调查<span class="chk" data-sec="s1-7">□ 已学</span></h2>
+<p>暴发/聚集性疫情调查（outbreak investigation）是流行病学的"现场实战"，标准十步（可并行、可迭代）：</p>
+<ol>
+  <li>核实诊断（病例定义）</li>
+  <li>确认暴发存在（与基线比较）</li>
+  <li>建立病例定义与病例搜索</li>
+  <li>描述性流行病学（三间分布：人/时/地）</li>
+  <li>形成假设（暴露-疾病关联）</li>
+  <li>检验假设（病例对照/队列分析）</li>
+  <li>补充证据（实验室、环境、分子分型）</li>
+  <li>采取控制措施（边调查边控制）</li>
+  <li>评价措施效果</li>
+  <li>总结报告与长效机制</li>
+</ol>
+<div class="box a"><div class="bt">🔬 肝病案例：医源性丙肝暴发</div>血液透析中心、牙科/内镜操作不规范、单采血浆回输等曾造成HCV医源性传播暴发（如1990年代中国部分地区"血浆浇地"事件）。暴发调查的经典链条：发现ALT升高聚集 → 抗-HCV筛查 → 病例对照找共同暴露（单采血浆史）→ 停用并消毒 → 确认下降。<b>对博士的启示</b>：血源性病原体的暴发调查要联合"流行病学三间分布 + 病毒序列同源性（分子流行病学）"两条证据链。</div>
+
+<h2 class="sec" id="s1-8">1.8 疾病监测<span class="chk" data-sec="s1-8">□ 已学</span></h2>
+<p><b>监测</b>（surveillance）：持续、系统地收集、分析、解释并反馈健康数据，是防控决策的"雷达"。类型：</p>
+<ul>
+  <li><b>被动监测</b>：依赖医疗机构法定报告（中国甲乙丙类法定传染病报告系统——乙肝、丙肝均为乙类）。</li>
+  <li><b>主动监测</b>：主动搜索病例（哨点医院、血清学调查）。</li>
+  <li><b>哨点监测</b>：在代表性哨点持续采样（如中国艾滋病丙肝哨点监测）。</li>
+  <li><b>实验室监测</b>：病原体测序、基因分型（HCV基因型分布监测）。</li>
+  <li><b>专项调查</b>：全国血清流行病学调查（乙肝表面抗原阳性率的最权威来源）。</li>
+</ul>
+<div class="box b"><div class="bt">📌 博士视角：监测数据的使用与陷阱</div>报告发病率受检测可及性与报告质量影响（中国乙肝报告数曾高于估算新发数，因大量"既往感染首次就诊即报告"）；使用监测数据做趋势分析前，先检查病例定义与报告标准的变更（如2004年网络直报、2013年乙肝诊断标准修订对报告数的影响）。</div>
+
+<h2 class="sec" id="s1-9">1.9 研究设计：问出好问题<span class="chk" data-sec="s1-9">□ 已学</span></h2>
+<p>流行病学研究设计按"研究者能否主动分配暴露"分为观察性与实验性两大类。选型逻辑：</p>
+<div class="flow">
+  <span class="node r">研究问题</span><span class="arr">→</span>
+  <span class="node">能随机分配暴露？</span>
+  <span class="lab">能</span><span class="arr">→</span><span class="node t">随机对照试验 RCT</span>
+  <span class="lab">不能，且罕见/潜伏期长</span><span class="arr">→</span><span class="node a">队列研究</span>
+  <span class="lab">不能，且快速/病例少</span><span class="arr">→</span><span class="node a">病例对照研究</span>
+  <span class="lab">只描述分布</span><span class="arr">→</span><span class="node">横断面调查</span>
+</div>
+<table>
+  <tr><th>设计</th><th>方向/时序</th><th>核心指标</th><th>优势</th><th>局限</th></tr>
+  <tr><td>横断面</td><td>同时</td><td>患病率</td><td>快、便宜</td><td>因果方向不明、含存活偏倚</td></tr>
+  <tr><td>病例对照</td><td>结局→暴露（回顾）</td><td>OR</td><td>罕见病高效</td><td>回忆/选择偏倚</td></tr>
+  <tr><td>队列</td><td>暴露→结局（前瞻）</td><td>RR/HR</td><td>因果强、可算发病率</td><td>贵、随访丢失</td></tr>
+  <tr><td>RCT</td><td>随机分配</td><td>RD/RR</td><td>因果最强</td><td>伦理/成本/外推受限</td></tr>
+  <tr><td>孟德尔随机化 MR</td><td>基因型→暴露→结局</td><td>因果估计</td><td>借助自然随机分配</td><td>需强工具变量假设</td></tr>
+</table>
+<div class="box t"><div class="bt">📌 博士视角：选择研究设计的检查清单</div>
+研究问题类型（PICO）？可行性与样本量？偏倚控制优先序？目标因果参数（ATE vs ATT vs ITT）？是否用真实世界数据（EHR/队列库）？——肝病研究常用"既有大样本队列+生物样本库"（如UK Biobank、中国慢性病前瞻性研究CKB），可同时做前瞻队列分析、巢式病例对照与孟德尔随机化，一鱼三吃。</div>
+
+<h2 class="sec" id="s1-10">1.10 预防与控制<span class="chk" data-sec="s1-10">□ 已学</span></h2>
+<ul>
+  <li><b>管理传染源</b>：病例报告与隔离、携带者随访管理（乙肝携带者定期复查）。</li>
+  <li><b>切断传播途径</b>：安全注射、血液筛查（血站核酸/血清学检测）、一次性医疗器械、消毒。</li>
+  <li><b>保护易感人群</b>：疫苗（乙肝疫苗是唯一可预防肝炎相关肝癌的疫苗）、暴露后预防（HBIG+疫苗）。</li>
+  <li><b>治疗即预防</b>（treatment as prevention）：抗病毒治疗降低病毒载量，同时减少传播（HIV领域"U=U"同理适用于HBV/HCV）。</li>
+</ul>
+<div class="box b"><div class="bt">🔬 中国的疫苗里程碑（乙型肝炎）</div>
+1992年乙肝疫苗纳入计划免疫管理 → 2002年纳入儿童免疫规划（EPI）→ 2005年起新生儿免费接种。配套HBIG阻断母婴传播、2009年起为15岁以下儿童查漏补种。结果：5岁以下儿童HBsAg阳性率从1992年的约9.7%降至2020年的0.30%。</div>
+
+<h2 class="sec" id="s1-11">1.11 现代趋势：分子流行病学、大数据与AI<span class="chk" data-sec="s1-11">□ 已学</span></h2>
+<ul>
+  <li><b>分子流行病学</b>：用病原体基因组（基因分型、系统发育）与宿主基因组（易感基因、HLA）回答传播链、起源与易感性问题——HCV基因型与DAA方案选择、HBV基因型与肝癌风险。</li>
+  <li><b>基因组流行病学</b>：全基因组关联研究（GWAS，如PNPLA3 I148M与脂肪肝/肝癌）、多基因风险评分（PRS）在风险分层中的应用。</li>
+  <li><b>大数据与AI</b>：电子病历（EHR）的真实世界研究、影像组学/深度学习自动判读肝纤维化、大语言模型辅助文献综述与数据提取。<b>注意</b>：AI预测模型必须做外部验证与校准，警惕过拟合与数据泄漏。</li>
+  <li><b>实施科学</b>（implementation science）：研究"如何把有效的干预（疫苗、DAA、筛查）真正落地"——消除肝炎目标的核心瓶颈恰在实施环节。</li>
+</ul>
+<div class="box a"><div class="bt">⚠️ 博士视角：AI应用于肝病流行病学的三条红线</div>
+1) 预测≠因果：ML模型用于预测不错，但别用变量重要性做因果解读；2) 数据泄漏：特征构建时用了结局信息（如用HCC诊断后的检查预测HCC）是常见致命错；3) 外部验证是标配：在训练集AUROC再高，没有独立人群验证等于没做。</div>
+<h2 class="sec" id="s2-1">2.1 肝病流行病学总览<span class="chk" data-sec="s2-1">□ 已学</span></h2>
+<p>肝脏疾病种类多、病因广、负担重，流行病学上通常按病因学框架组织：</p>
+<table>
+  <tr><th>类别</th><th>主要病因</th><th>结局谱</th><th>全球负担量级（近年估算）</th></tr>
+  <tr><td>病毒性肝炎</td><td>HBV（2.4亿慢性）、HCV（4700万慢性）</td><td>慢性肝炎→肝硬化→肝癌</td><td>年相关死亡约134万（WHO 2024年数据）</td></tr>
+  <tr><td>代谢性肝病</td><td>肥胖、糖尿病、代谢综合征（MASLD）</td><td>脂肪肝→脂肪性肝炎→纤维化→肝硬化</td><td>全球成人约30%–38%（约13亿人）</td></tr>
+  <tr><td>酒精性肝病</td><td>过量饮酒</td><td>脂肪肝→酒精性肝炎→肝硬化</td><td>中国成人患病率约4%–6%（估算）</td></tr>
+  <tr><td>自身免疫/遗传</td><td>AIH、PBC、PSC、血色病、Wilson病</td><td>慢性肝炎→肝硬化</td><td>相对少见但研究热点</td></tr>
+  <tr><td>药物性肝损伤 DILI</td><td>药物、中草药、保健品</td><td>急性/慢性肝损伤</td><td>中国DILI年发生率估算23.8/10万</td></tr>
+</table>
+<div class="box b"><div class="bt">📌 博士视角：肝病负担的"病因转型"</div>
+全球与中国都正在经历从"病毒性肝炎主导"向"代谢性肝病快速上升"的病因转型：HBV/HCV新发在下降（疫苗+DAA），而MASLD/ALD在上升。研究选题与政策配置都需要跟着病因流行病学走——"病因占比（PAF）动态变化"本身就是很好的博士论文题目。</div>
+
+<h2 class="sec" id="s2-2">2.2 病毒性肝炎家族：甲/戊 vs 乙/丙/丁<span class="chk" data-sec="s2-2">□ 已学</span></h2>
+<table>
+  <tr><th>型别</th><th>传播途径</th><th>慢性化</th><th>疫苗</th><th>流行病学要点</th></tr>
+  <tr><td>甲肝 HAV</td><td>粪-口（食物/水）</td><td>否（急性自限）</td><td>有（甲肝疫苗）</td><td>发展中国家儿童高发；中国纳入扩大免疫后大幅下降</td></tr>
+  <tr><td>戊肝 HEV</td><td>粪-口（污染水、未熟猪肉等）</td><td>一般否（免疫抑制者可慢性）</td><td>有（戊肝疫苗，中国研发）</td><td>孕妇重症病死率高（妊娠晚期可达10%–20%）；中国部分农村地区高发</td></tr>
+  <tr><td>乙肝 HBV</td><td>血液、母婴、性接触</td><td>是（成人约5%–10%，婴儿约90%）</td><td>有（乙肝疫苗）</td><td>中国最重的肝炎负担；2.4亿全球慢性感染者</td></tr>
+  <tr><td>丙肝 HCV</td><td>血液为主（注射吸毒、医源性、输血史）</td><td>是（55%–85%）</td><td>无</td><td>DAA可治愈；全球4700万慢性感染者</td></tr>
+  <tr><td>丁肝 HDV</td><td>血液（需与HBV共同/重叠感染）</td><td>是（与HBV叠加，进展更快）</td><td>无（乙肝疫苗可防）</td><td>中国HDV感染率被低估，近年研究显示HBsAg阳性者中约2%–5%合并HDV（不同地区差异大）</td></tr>
+</table>
+<div class="box a"><div class="bt">⚠️ 博士视角：HBV/HCV"慢性感染"的定义是流行病学第一课</div>
+慢性乙肝（CHB）与"HBsAg阳性携带"不是一回事：慢性感染指HBsAg阳性持续≥6个月；CHB通常还要求有病毒复制与肝脏炎症的证据。报告"感染者数"时务必注明是HBsAg阳性（感染标记）还是CHB（活动性肝炎），两者数量级差数倍。</div>
+
+<h2 class="sec" id="s2-3">2.3 乙型肝炎流行病学（重点）<span class="chk" data-sec="s2-3">□ 已学</span></h2>
+<h3>全球负担（WHO 2026年全球肝炎报告，2024年数据）</h3>
+<ul>
+  <li>慢性乙肝感染者约 <b>2.4亿</b>；慢性丙肝约4700万；合计约2.87亿（全球约3%人口）。</li>
+  <li>乙肝新发约90万/年、丙肝新发约90万/年（合计约180万）。</li>
+  <li>乙肝相关死亡约 <b>110万</b>、丙肝约24万（合计约134万，乙肝占约82%–83%）。</li>
+  <li>治疗率仍极低：乙肝&lt;5%、丙肝约20%（自2015年DAA问世以来累计）。</li>
+  <li>进展亮点：5岁以下儿童乙肝流行率降至 <b>0.6%</b>，85个国家已达2030年0.1%目标；乙肝新发较2015年降32%、丙肝死亡降12%。</li>
+  <li>分布不均衡：10个国家占全球乙肝死亡的69%（含中国）；丙肝新发中注射吸毒人群占44%。</li>
+</ul>
+<h3>中国：从"高流行"到"中流行"的转型（四次全国血清学调查）</h3>
+<table>
+  <tr><th>调查年份</th><th>对象</th><th>HBsAg阳性率</th><th>要点</th></tr>
+  <tr><td>1992</td><td>一般人群</td><td>约9.7%</td><td>乙肝疫苗纳入计划免疫管理</td></tr>
+  <tr><td>2006</td><td>1–59岁</td><td>7.18%</td><td>推算慢性感染者约9300万、CHB约2000万</td></tr>
+  <tr><td>2014</td><td>1–29岁</td><td>1–4岁0.32%；5–14岁0.94%；15–29岁4.38%</td><td>较1992年分别降96.7%、91.2%、55.1%（疫苗效果）</td></tr>
+  <tr><td>2020</td><td>1–69岁</td><td>5.86%；&lt;5岁0.30%</td><td>推算慢性HBV约7500万；抗-HCV 0.28%、HCV RNA 0.15%</td></tr>
+</table>
+<div class="box t"><div class="bt">📌 博士视角：为什么"7500万"与"9300万"都对</div>
+不同年份的估算因调查对象年龄范围、抽样设计与定义不同而不可直接相减：2006年是1–59岁、2020年是1–69岁。跨年份比较务必先对齐口径（同一年龄范围+同一定义），或直接引用官方可比序列。这类"口径陷阱"是审稿人最爱问的问题。</div>
+<h3>传播、自然史与预防</h3>
+<ul>
+  <li><b>传播</b>：母婴（围产期，中国历史主要途径）、血液（不安全注射/输血史）、性接触；不经共餐、拥抱传播。</li>
+  <li><b>自然史</b>：感染年龄越小慢性化率越高（婴儿约90%、成人约5%–10%）；慢性乙肝每年约2%–5%进展为肝硬化（估算区间），肝硬化每年约3%–6%进展为肝癌（估算区间）。</li>
+  <li><b>母婴阻断</b>：新生儿24h内疫苗+HBIG，阻断成功率&gt;90%。</li>
+  <li><b>治疗</b>：核苷（酸）类似物（恩替卡韦、替诺福韦等）或聚乙二醇干扰素；长期抗病毒可显著降低肝硬化与肝癌风险。</li>
+</ul>
+
+<h2 class="sec" id="s2-4">2.4 丙型肝炎流行病学<span class="chk" data-sec="s2-4">□ 已学</span></h2>
+<ul>
+  <li><b>全球</b>：慢性HCV约4700万（WHO 2024年数据）；WHO 2024年报告（2022年数据）为5000万口径，各年份报告数值有差异，引用注明年份。</li>
+  <li><b>中国</b>：2020年全国血清学调查抗-HCV 0.28%、HCV RNA阳性0.15%（估计感染者约数百万级）；以1b型为主（约60%–70%）。</li>
+  <li><b>传播</b>：注射吸毒（全球新发44%）、不安全注射/医源性（历史单采血浆、输血）、有创操作、纹身穿孔、性接触（低但存在）、母婴（约5%）。</li>
+  <li><b>自然史</b>：急性感染后55%–85%慢性化；慢性丙肝20–30年内10%–30%进展肝硬化；肝硬化年1%–4%发生肝癌。</li>
+  <li><b>治愈革命</b>：直接抗病毒药物（DAA）8–12周疗程治愈率&gt;95%；WHO把"筛查→治疗"作为消除丙肝的核心路径：<b>抗体初筛→RNA确认→DAA治疗</b>。</li>
+</ul>
+<div class="flow">
+  <span class="node">抗体筛查</span><span class="arr">→</span>
+  <span class="node a">阳性者</span><span class="arr">→</span>
+  <span class="node t">HCV RNA 确认</span><span class="arr">→</span>
+  <span class="node r">RNA阳性=现症感染</span><span class="arr">→</span>
+  <span class="node">DAA 8–12周</span><span class="arr">→</span>
+  <span class="node">治愈（SVR12）</span>
+</div>
+<div class="box b"><div class="bt">📌 博士视角：SVR（持续病毒学应答）是丙肝研究的"硬终点"</div>
+SVR12（治疗结束后12周HCV RNA检测不到）≈治愈。但注意：<b>SVR≠零肝癌风险</b>——已有肝硬化的患者治愈后肝癌风险仍高于常人，需长期监测。流行病学研究中把"是否达到SVR""治愈后是否仍发生HCC"作为结局，可做真实世界的长期队列随访。</div>
+
+<h2 class="sec" id="s2-5">2.5 肝癌流行病学<span class="chk" data-sec="s2-5">□ 已学</span></h2>
+<h3>全球与中国（GLOBOCAN 2022）</h3>
+<ul>
+  <li>全球：肝癌新发约 <b>86.6万</b>/年、死亡约 <b>75.8万</b>/年（癌症死因第3位）。</li>
+  <li>中国：新发约 <b>36.8万</b>（约占全球42%）、死亡约 <b>31.7万</b>；年龄标化发病率（ASIR）15.0/10万、标化死亡率（ASMR）12.6/10万。</li>
+  <li>中国男性发病呈双峰：50–54岁与65–69岁；蒙古国ASMR最高（80.2/10万）。</li>
+</ul>
+<h3>危险因素与病因占比（PAF）</h3>
+<table>
+  <tr><th>因素</th><th>机制要点</th><th>中国人群归因（估算区间）</th></tr>
+  <tr><td>HBV</td><td>慢性感染→肝硬化→HCC；HBV DNA整合</td><td>约60%–80%（中国最主要病因）</td></tr>
+  <tr><td>HCV</td><td>慢性炎症→肝硬化→HCC</td><td>约5%–15%</td></tr>
+  <tr><td>黄曲霉毒素</td><td>AFB1致TP53 R249S突变</td><td>历史重要，近年下降</td></tr>
+  <tr><td>酒精</td><td>肝硬化基础+直接致癌</td><td>约5%–10%</td></tr>
+  <tr><td>代谢因素（MASLD/糖尿病/肥胖）</td><td>脂肪性肝炎→纤维化→HCC；胰岛素抵抗</td><td>快速上升，未来主角</td></tr>
+</table>
+<div class="box a"><div class="bt">⚠️ 博士视角：肝癌研究的"分母"与"分子"要一致</div>
+研究"HBV相关肝癌"时，分子是"HBV阳性HCC"，分母是"HBV感染者"而非全部HCC——PAF（人群归因分数）要同时给出暴露率与相对危险度。另外，中国肝癌死亡统计（死因监测）与发病统计（肿瘤登记）覆盖人群不同，跨来源比较要小心。</div>
+
+<h2 class="sec" id="s2-6">2.6 肝硬化流行病学<span class="chk" data-sec="s2-6">□ 已学</span></h2>
+<ul>
+  <li><b>定义</b>：肝硬化是各种慢性肝病的终末共同通路，以弥漫性纤维化+结节再生+正常结构破坏为特征；分代偿期（无症状）与失代偿期（腹水、静脉曲张出血、肝性脑病、黄疸）。</li>
+  <li><b>负担</b>：全球肝硬化年新发约100万–200万（估算）；GBD数据显示肝硬化（含酒精性与非酒精性）位列全球死亡原因前20。</li>
+  <li><b>病因构成</b>：欧美以酒精+MASLD为主；中国仍以HBV为主，但MASLD/ALD占比快速上升。</li>
+  <li><b>自然史</b>：代偿期肝硬化年死亡率约5%；出现失代偿后中位生存显著缩短；肝硬化年肝癌发生率1%–6%（病因与分期而异）。</li>
+  <li><b>流行病学研究要点</b>：肝硬化病例如何定义？——临床诊断（影像+实验室+并发症）vs 病理确诊 vs 无创指标（LSM≥特定kPa）；不同定义导致患病率估算差异巨大。</li>
+</ul>
+<div class="box t"><div class="bt">🔬 关键衔接：肝硬化研究离不开"纤维化分期"与无创评估</div>
+肝纤维化是肝硬化的前奏与本质，而纤维化分期（F0–F4）在流行病学中的测量几乎全部依赖无创工具——这正是下一节（2.7）的用武之地。<b>记住</b>：流行病学里"肝硬化"通常是"复合定义"（无创LSM界值+临床并发症+影像），写方法时一定要写明定义与验证。</div>
+
+<h2 class="sec" id="s2-7">2.7 肝纤维化的无创评估工具（NITs）详解<span class="chk" data-sec="s2-7">□ 已学</span></h2>
+<p>本部分是全库最核心的方法学章节：无创评估工具（non-invasive tests，NITs）是把"组织学纤维化"翻译成"可在人群中测量的变量"的关键，博士阶段的队列设计、负担估算、结局定义都绕不开它。</p>
+
+<h3>2.7.1 为什么流行病学研究离不开NITs？</h3>
+<ul>
+  <li><b>纤维化是肝病的核心中间表型</b>：失代偿肝硬化、HCC、肝病死亡几乎都发生在进展期纤维化（F3–F4）基础上；纤维化分期是风险分层、随访策略与治疗决策的基石。</li>
+  <li><b>肝活检（金标准）的局限</b>：有创（疼痛、出血，极少数严重并发症）、<b>采样误差</b>（穿刺仅取肝脏约1/50000，右叶15mm样本的代表性有限）、观察者间差异（METAVIR/Ishak/Scheuer评分系统不一致）、成本高；在人群研究、真实世界数据中基本不可行。</li>
+  <li><b>纤维化分期系统速览</b>：METAVIR（F0–F4）、Ishak（0–6）、Scheuer（0–4）；论文常用三档：<b>显著纤维化（≥F2）、进展期纤维化（≥F3）、肝硬化（F4）</b>——写方法时先定义这几档。</li>
+  <li><b>结论</b>：横断面患病率调查、队列风险预测、干预试验终点、药物流行病学/EHR研究，几乎全部依赖NITs。NITs的本质是"用常规可及信息逼近组织学纤维化的测量工具"。</li>
+</ul>
+
+<h3>2.7.2 血清学组合评分（便宜、可重复、可回顾计算）</h3>
+<h4>① FIB-4（纤维化-4指数，Sterling 2006）</h4>
+<div class="formula">FIB-4 = 年龄(岁) × AST(U/L) ÷ [ PLT(10⁹/L) × √ALT(U/L) ]</div>
+<ul>
+  <li>初衷为HIV/HCV合并感染人群，现已被AGA/AASLD/EASL共同推荐为<b>代谢相关脂肪性肝病的一线筛查工具</b>；中国社区MASLD研究也在广泛使用。</li>
+  <li><b>经典界值</b>：&lt;1.3 排除进展期纤维化（NPV≥90%）；&gt;2.67 提示进展期纤维化（PPV约65%–80%）；1.3–2.67为<b>灰色地带</b>（占人群约20%–30%），需二线检测（弹性成像/ELF）。</li>
+  <li><b>年龄校正</b>：≥65岁人群建议用 &lt;2.0 作为排除界值（AGA建议），因为FIB-4随年龄自然升高。</li>
+  <li><b>性能</b>：NAFLD中诊断进展期纤维化AUROC约0.78–0.80。</li>
+  <li><b>局限</b>：年龄偏倚、血小板受多种疾病影响、转氨酶波动、对早期（F1–F2）不敏感。</li>
+</ul>
+<h4>② APRI（AST/血小板比值指数，Wai 2003）</h4>
+<div class="formula">APRI = (AST ÷ AST正常上限) × 100 ÷ PLT(10⁹/L)</div>
+<ul>
+  <li>WHO 2018年乙肝防治指南在<b>资源有限地区</b>推荐用于肝硬化评估；也是CHB/CHC负担调查的常用工具。</li>
+  <li><b>常用界值</b>：&lt;0.5 排除显著纤维化；&gt;1.0–1.5 提示肝硬化（界值随病因与人群而异，引用时注明来源）。</li>
+  <li><b>性能</b>：显著纤维化AUROC约0.70–0.80、肝硬化约0.80–0.88（不同研究）。</li>
+</ul>
+<h4>③ NFS（NAFLD纤维化评分，Angulo 2007）</h4>
+<div class="formula">NFS = −1.675 + 0.037×年龄 + 0.094×BMI + 1.13×空腹血糖受损/糖尿病(1/0) + 0.99×(AST/ALT) − 0.013×PLT − 0.66×白蛋白(g/dL)</div>
+<ul>
+  <li><b>界值</b>：&lt;−1.455 排除F3–F4；&gt;0.676 提示（中间为灰色地带）；AUROC约0.78。</li>
+  <li>需BMI与白蛋白，适合有完整体检数据的队列。</li>
+</ul>
+<h4>④ 其他血清学工具（按需了解）</h4>
+<ul>
+  <li><b>Forns指数</b>：年龄、GGT、胆固醇、血小板。</li>
+  <li><b>FibroTest/FibroSure</b>：商业panel（α2-巨球蛋白、触珠蛋白、GGT、ApoA1、总胆红素），需付费。</li>
+  <li><b>ELF</b>（增强肝纤维化评分）：透明质酸+PIIINP+TIMP-1；≥9.8常提示进展期纤维化（不同研究界值9.2–10.5）。</li>
+  <li><b>ProC3</b>：III型胶原前肽，与脂肪性肝炎相关，多用于临床试验与机制研究。</li>
+  <li><b>实践建议</b>：人群流行病学调查标配是<b>FIB-4/APRI/NFS</b>（常规检验即可计算，可回顾用于EHR大数据）；商业panel与新型标志物成本高，多在亚队列验证时使用。</li>
+</ul>
+
+<h3>2.7.3 影像弹性成像（按成本从低到高）</h3>
+<h4>① 瞬时弹性成像 TE（FibroScan，VCTE）</h4>
+<ul>
+  <li><b>原理</b>：振动控制瞬时弹性波（VCTE）测肝脏剪切波速度→换算为肝硬度（kPa）；可同步输出<b>CAP</b>（受控衰减参数，dB/m，脂肪变性定量，AUROC约0.76–0.87）。</li>
+  <li><b>优势</b>：床旁即时、重复性好、门诊可行；在队列与社区筛查中可移动部署。</li>
+</ul>
+<table>
+  <tr><th>病因</th><th>显著纤维化 F≥2</th><th>进展期纤维化 F≥3</th><th>肝硬化 F4</th><th>来源（参考）</th></tr>
+  <tr><td>慢性乙肝（中国多中心，特异度95%）</td><td>9.1 kPa</td><td>12.4 kPa</td><td>21.3 kPa</td><td>慢性乙肝防治指南(2019年版)</td></tr>
+  <tr><td>慢性丙肝</td><td>7–8.5 kPa（Se 79%、Sp 83%）</td><td>—</td><td>11–14.6 kPa（常用12.5）</td><td>WHO 2014 CHC指南</td></tr>
+  <tr><td>MASLD/NAFLD</td><td>—</td><td>9.7 kPa</td><td>13.6–15 kPa（&lt;10可排除肝硬化）</td><td>指南/综述（参考）</td></tr>
+  <tr><td>酒精性肝病</td><td>—</td><td>—</td><td>≥20 kPa（&lt;12.5排除）</td><td>中国超声诊断指南（参考）</td></tr>
+</table>
+<ul>
+  <li><b>性能参考</b>（CHB）：F≥2 AUROC 0.78–0.87、F≥3 0.87–0.93、F4 0.84–0.96。</li>
+  <li><b>失败与误读</b>：肥胖（BMI&gt;30失败率高，需XL探头）、腹水（不可行）、急性炎症/ALT升高（假性升高）、胆汁淤积与右心衰（充血性升高）——解读必须结合临床状态，队列研究要记录ALT与空腹状态。</li>
+</ul>
+<h4>② 点剪切波 ARFI / 二维剪切波 2D-SWE</h4>
+<ul>
+  <li>整合在常规超声设备（西门子ARFI、SuperSonic Aixplorer等），报kPa或m/s；性能与TE相当，可同时做腹部超声。</li>
+  <li>示例（CHC，中国共识2023）：2D-SWE诊断F2/F3/F4的最佳阈值分别为 <b>8.15 / 10.31 / 12.65 kPa</b>（不同设备间绝对值有差异，需按设备校准）。</li>
+</ul>
+<h4>③ 磁共振弹性成像 MRE</h4>
+<ul>
+  <li><b>特点</b>：全肝覆盖、成功率最高、准确性最高（进展期纤维化AUROC常&gt;0.90，肝硬化约0.95以上）；可同步<b>MRI-PDFF</b>（质子密度脂肪分数）定量脂肪——MASH临床试验的脂肪定量参考技术。</li>
+  <li><b>参考界值</b>：进展期纤维化约4 kPa（多数研究3.6–4.7之间）；肝硬化约5 kPa以上（不同厂商/序列有差异）。</li>
+  <li><b>局限</b>：贵、耗时长、可及性低；多用于三级中心研究与小规模队列、以及作为"无创参考标准"。</li>
+</ul>
+
+<h3>2.7.4 混杂与测量学问题（流行病学分析必须处理）</h3>
+<ul>
+  <li><b>肝硬度≠纯纤维化</b>：炎症活动（ALT/AST升高）、胆汁淤积、充血性心衰、急性肝炎、<b>进食后2–3小时内</b>均可升高——横断面调查要记录ALT、空腹状态、治疗史；同一患者炎症消退后LSM可下降。</li>
+  <li><b>病因特异性</b>：同一kPa值在不同病因（CHB vs MASLD vs ALD）意义不同→分层分析或使用病因特异界值，切忌跨病因套用。</li>
+  <li><b>测量误差与回归稀释</b>：单次LSM噪声大，队列中多次测量取均值或用<b>轨迹分析</b>可减小偏倚；把连续值砍成二分类（如LSM≥13kPa）会损失信息，建议连续+敏感度分析并用。</li>
+  <li><b>血清学评分的年龄偏倚</b>：FIB-4/NFS随年龄上升，老年人群假阳性率高→年龄分层或年龄校正界值（65岁FIB-4&lt;2.0）。</li>
+</ul>
+
+<h3>2.7.5 流行病学应用场景</h3>
+<table>
+  <tr><th>场景</th><th>典型做法</th><th>示例/要点</th></tr>
+  <tr><td>横断面负担调查</td><td>FIB-4筛查→高危者TE确认</td><td>社区MASLD研究：FIB-4 1.30–2.67且LSM 8–12 kPa→显著纤维化；FIB-4&gt;2.67且LSM&gt;12→进展期；FIB-4≥3.48且LSM≥20→肝硬化</td></tr>
+  <tr><td>队列研究</td><td>基线NITs作暴露/风险分层；随访LSM轨迹</td><td>预测HCC/失代偿/死亡；DAA治愈后LSM下降的"纤维化逆转"研究</td></tr>
+  <tr><td>干预试验</td><td>组织学为主终点；NITs作次要/替代终点</td><td>MASH新药（如瑞美替罗）试验、DAA疗程前后LSM变化</td></tr>
+  <tr><td>真实世界/EHR研究</td><td>FIB-4由检验数据常规计算</td><td>AGA建议2型糖尿病/肥胖人群FIB-4筛查；中国社区脂肪肝筛查"FIB-4→TE"两步法</td></tr>
+  <tr><td>筛查策略评价</td><td>两步法成本效果分析</td><td>一线血清评分→二线弹性成像→转诊肝病科；卫生经济学评价</td></tr>
+</table>
+<div class="flow">
+  <span class="node">一线：FIB-4 常规检验</span><span class="arr">→</span>
+  <span class="node a">1.3–2.67 灰色地带</span><span class="arr">→</span>
+  <span class="node t">二线：TE / ELF</span><span class="arr">→</span>
+  <span class="node r">高危→肝病专科</span>
+</div>
+
+<h3>2.7.6 诊断准确性方法学（博士必懂）</h3>
+<ul>
+  <li><b>指标</b>：敏感度、特异度、PPV/NPV、AUROC（0.8–0.9=良好）。<b>注意</b>：AUROC对人群患病率不敏感，报告时同时给校准（calibration）与决策曲线（DCA）。</li>
+  <li><b>三分法优于单一cutoff</b>：低/中/高风险三分法贴合临床决策；预先定义灰色地带及其处理（二线检测/随访），避免把灰色地带人群"硬分类"。</li>
+  <li><b>外部验证与跨人群迁移</b>：FIB-4等在NAFLD、CHB、HCV、ALD、不同种族/年龄性能不同；引用界值前必须在目标人群验证（报告AUROC、校准、NRI重分类改善）。</li>
+  <li><b>不完美金标准偏倚</b>（imperfect gold standard）：以活检为参照时，活检自身采样误差会"低估"NITs的真实性能；可同时报告以临床复合终点（失代偿/HCC/死亡）或MRE为参照的结果。</li>
+  <li><b>报告规范</b>：诊断准确性研究遵循STARD条目；预测模型遵循TRIPOD。</li>
+</ul>
+
+<h3>2.7.7 给博士的实操建议</h3>
+<div class="box b"><div class="bt">📌 研究中的NITs使用checklist</div>
+1) 首选组合：<b>FIB-4（一线）→ TE（二线确认）</b>，有条件队列加MRE/MRI-PDFF；2) 方法学部分必须报告：NIT定义与版本、cutoff来源与病因适用性、灰色地带比例、是否做外部验证；3) 结局定义：把LSM作连续变量保留，二分类结论用敏感度分析验证；4) 一句话总结——NITs是"流行病学家的肝活检"：便宜、可重复、可扩展，但永远要报告它的不确定区间。</div>
+
+<h3>2.7.8 工具速查对比表</h3>
+<table>
+  <tr><th>工具</th><th>本质</th><th>成本</th><th>关键界值（参考）</th><th>AUROC（参考）</th><th>流行病学用途</th><th>主要局限</th></tr>
+  <tr><td>FIB-4</td><td>血清评分</td><td>极低</td><td>&lt;1.3排除 / &gt;2.67提示</td><td>0.78–0.80（NAFLD）</td><td>一线筛查、EHR研究</td><td>年龄偏倚、灰色地带大</td></tr>
+  <tr><td>APRI</td><td>血清评分</td><td>极低</td><td>&lt;0.5排除 / &gt;1.0–1.5提示肝硬化</td><td>0.70–0.88</td><td>资源有限地区负担调查</td><td>转氨酶波动</td></tr>
+  <tr><td>NFS</td><td>血清评分</td><td>低</td><td>&lt;−1.455 / &gt;0.676</td><td>约0.78</td><td>MASLD队列</td><td>需BMI/白蛋白</td></tr>
+  <tr><td>TE（FibroScan）</td><td>弹性成像</td><td>中</td><td>CHB：9.1/12.4/21.3 kPa</td><td>0.78–0.96</td><td>二线确认、队列随访</td><td>肥胖/腹水失败、炎症假性升高</td></tr>
+  <tr><td>ARFI/2D-SWE</td><td>弹性成像</td><td>中</td><td>CHC：8.15/10.31/12.65 kPa</td><td>与TE相当</td><td>超声检查时顺带测量</td><td>设备间差异</td></tr>
+  <tr><td>MRE</td><td>磁共振弹性成像</td><td>高</td><td>F≥3约4 kPa</td><td>&gt;0.90</td><td>小样本精确研究、参考标准</td><td>贵、可及性低</td></tr>
+</table>
+
+<h2 class="sec" id="s2-8">2.8 代谢相关脂肪性肝病（MASLD，原NAFLD）<span class="chk" data-sec="s2-8">□ 已学</span></h2>
+<ul>
+  <li><b>更名史</b>：2023年6月，AASLD/EASL/ALPA等多学会德尔菲共识将NAFLD更名为 <b>MASLD</b>（metabolic dysfunction-associated steatotic liver disease），并用SLD作为脂肪性肝病总称；诊断需"影像/组织学脂肪变性+至少1项心血管代谢危险因素"。</li>
+  <li><b>疾病谱</b>：单纯脂肪变性→脂肪性肝炎（MASH，原NASH，需组织学）→纤维化→肝硬化→HCC；<b>纤维化分期是预后最强的预测因子</b>（这也是NITs重要的原因）。</li>
+  <li><b>负担</b>：全球成人患病率约30%–38%（meta约32%–38%），2023年估计约13亿人；中国约29%–30%（2025年中华流行病学杂志报道上海成人标化患病率39.65%，供参考）。</li>
+  <li><b>危险因素</b>：肥胖、2型糖尿病、血脂异常、高血压、代谢综合征；遗传（PNPLA3 I148M、TM6SF2等）修饰风险。</li>
+  <li><b>治疗</b>：生活方式干预（减重≥7%–10%可改善组织学）为基石；2024年3月FDA批准首个MASH药物<b>瑞美替罗（resmetirom）</b>（THR-β激动剂）；更多药物在研。</li>
+</ul>
+<div class="box a"><div class="bt">⚠️ 博士视角：MASLD诊断的"排除性"与"包容性"之争</div>
+NAFLD强调"排除酒精"（饮酒阈值男≥30g/天、女≥20g/天）；MASLD强调"纳入代谢因素"，且承认MASLD与ALD可共存（MetALD）——这对病例定义的流行病学一致性提出新要求：<b>酒精暴露的测量（量、频率、类型）必须标准化</b>，否则患病率与PAF不可比。</div>
+
+<h2 class="sec" id="s2-9">2.9 酒精性肝病（ALD）<span class="chk" data-sec="s2-9">□ 已学</span></h2>
+<ul>
+  <li><b>酒精换算</b>：纯酒精克数 = 饮用量(ml) × 酒精度(%) × 0.8。<b>风险阈值（参考）</b>：男性≥40g/天、女性≥20g/天为"有害饮酒"界值。</li>
+  <li><b>疾病谱</b>：酒精性脂肪肝→酒精性肝炎→酒精性肝硬化→HCC；酒精性肝炎可急性加重，短期病死率高。</li>
+  <li><b>负担</b>：中国成人ALD患病率约4%–6%（估算）；全球酒精归因的肝硬化死亡占比约1/4–1/3（GBD，随地区而异）。</li>
+  <li><b>交互作用</b>：酒精+HBV/HCV协同致癌（PAF研究中常做相乘交互）；酒精+肥胖/糖尿病协同加重。</li>
+  <li><b>研究要点</b>：饮酒测量（Audit问卷、回忆偏倚）、戒酒干预评价、与MASLD共存的"MetALD"定义——流行病学问卷设计是ALD研究的第一道坎。</li>
+</ul>
+
+<h2 class="sec" id="s2-10">2.10 肝病流行病学研究方法要点（博士进阶）<span class="chk" data-sec="s2-10">□ 已学</span></h2>
+<h3>常用数据源</h3>
+<ul>
+  <li><b>全球/区域</b>：GBD（IHME，DALY/死亡/患病）、GLOBOCAN（癌症）、WHO全球肝炎报告。</li>
+  <li><b>中国</b>：全国传染病报告系统、四次全国血清流行病学调查、肿瘤登记（国家癌症中心）、死因监测、中国慢性病前瞻性研究（CKB，50万人群+生物样本）、UK Biobank（英国，适合暴露-肝病关联与MR）。</li>
+  <li><b>队列库</b>：CKB（乙肝/丙肝与肝癌）、上海/香港等地区队列、NAFLD前瞻队列。</li>
+</ul>
+<h3>结局定义的"三选一"</h3>
+<ul>
+  <li><b>硬临床终点</b>：失代偿、HCC、肝移植、肝病死亡（金标准，但随访长、事件少）。</li>
+  <li><b>复合替代终点</b>：进展期纤维化（FIB-4/TE定义）、肝硬化（LSM/影像/并发症定义）——事件多、随访短。</li>
+  <li><b>连续中间变量</b>：LSM变化、ALT、HBV DNA、肝脂肪含量（MRI-PDFF）——信息最大、偏倚风险最高。</li>
+</ul>
+<h3>方法学进阶清单（博士答辩常问）</h3>
+<div class="box t"><div class="bt">📌 六件套：让审稿人挑不出毛病的进阶方法</div>
+1) <b>竞争风险模型</b>：肝病研究死亡事件中"非肝死亡"是竞争事件——用Fine-Gray子分布风险模型或cause-specific模型，别裸用Kaplan-Meier/Cox；2) <b>孟德尔随机化（MR）</b>：用遗传工具变量处理"饮酒量/脂肪肝/肝酶与肝癌"的因果问题（注意多效性与工具变量强度检验）；3) <b>多状态模型</b>：健康→纤维化→肝硬化→HCC→死亡的多阶段转换，比单终点更贴自然史；4) <b>轨迹分析</b>：潜类别轨迹建模（LCGM）刻画LSM/ALT的纵向轨迹并预测结局；5) <b>测量误差校正</b>：对单次NITs测量做回归稀释校正（用重复测量子样本估信度）；6) <b>校准与外部验证</b>：预测模型必须在独立人群验证并报告校准图。</div>
+<div class="box a"><div class="bt">⚠️ 常见坑</div>
+患病率数据跨年份直接相减（口径不同）；把横断面OR当因果；病例对照中对照选入院者（Berkson偏倚）；随访中失访者与结局相关（删失机制）；把"肝病死亡"混入"全因死亡"再谈特异性；忽视竞争风险导致高估累积发生率。</div>
+
+<h2 class="sec" id="s2-11">2.11 消除病毒性肝炎：全球目标与中国行动<span class="chk" data-sec="s2-11">□ 已学</span></h2>
+<ul>
+  <li><b>WHO 2030消除目标</b>（相对2015年基线）：新发感染减少90%、病毒性肝炎死亡减少65%、诊断率90%、治疗覆盖率80%。</li>
+  <li><b>中国·消除丙肝行动</b>：《消除丙型肝炎公共卫生危害行动工作方案(2021–2030年)》——扩大筛查与转诊，目标到2030年抗体阳性者核酸检测率≥95%、治疗率≥80%；DAA已纳入医保并大幅降价。</li>
+  <li><b>中国·病毒性肝炎行动计划</b>：《中国防治病毒性肝炎行动计划(2025–2030年)》（国家疾控局等9部门，2025年9月发布）——覆盖乙肝母婴阻断、扩大检测治疗、减少歧视等。</li>
+  <li><b>实现路径</b>：90-90-90逻辑（诊断90%→治疗80%→病毒抑制/治愈）；丙肝"筛查-治愈"闭环；乙肝"治疗即预防"扩大适应症；社会层面减少歧视、推动"应检尽检、应治尽治"。</li>
+  <li><b>博士机会</b>：消除目标的监测评估本身就是流行病学——如何测量"诊断率/治疗率"（分子=治疗数，分母=感染者数估算）、如何评价筛查策略的成本效果、如何在基层落地（实施科学）。</li>
+</ul>
+<div class="flow">
+  <span class="node">WHO 2030</span><span class="arr">→</span>
+  <span class="node t">新发 −90%</span><span class="node t">死亡 −65%</span><span class="node t">诊断 90%</span><span class="node t">治疗 80%</span><span class="arr">→</span>
+  <span class="node r">监测评估 = 流行病学的战场</span>
+</div>
+<h2 class="sec" id="s3-1">3.1 中英对照术语表<span class="chk" data-sec="s3-1">□ 已学</span></h2>
+<h3>基础流行病学</h3>
+<table>
+<tr><th>英文</th><th>中文（官方/通行译法）</th><th>说明</th></tr>
+<tr><td>epidemiology</td><td>流行病学</td><td>研究人群中疾病分布与决定因素的科学</td></tr>
+<tr><td>incidence</td><td>发病率</td><td>新发病例/人时</td></tr>
+<tr><td>prevalence</td><td>患病率</td><td>现有病例/人口</td></tr>
+<tr><td>mortality rate</td><td>死亡率</td><td>死亡数/人口</td></tr>
+<tr><td>DALY</td><td>伤残调整生命年</td><td>YLL+YLD，疾病负担指标</td></tr>
+<tr><td>basic reproduction number (R₀)</td><td>基本再生数</td><td>完全易感人群中1例感染者的续发数</td></tr>
+<tr><td>herd immunity</td><td>群体免疫</td><td>阈值=1−1/R₀</td></tr>
+<tr><td>attack rate</td><td>罹患率/侵袭率</td><td>暴发调查常用</td></tr>
+<tr><td>case definition</td><td>病例定义</td><td>暴发调查/监测的标准</td></tr>
+<tr><td>surveillance</td><td>疾病监测</td><td>持续系统收集分析健康数据</td></tr>
+<tr><td>cohort study</td><td>队列研究</td><td>暴露→结局，前瞻</td></tr>
+<tr><td>case-control study</td><td>病例对照研究</td><td>结局→暴露，回顾</td></tr>
+<tr><td>cross-sectional study</td><td>横断面研究</td><td>同时测量</td></tr>
+<tr><td>randomized controlled trial</td><td>随机对照试验（RCT）</td><td>因果最强设计</td></tr>
+<tr><td>Mendelian randomization</td><td>孟德尔随机化</td><td>遗传工具变量因果推断</td></tr>
+<tr><td>confounding</td><td>混杂</td><td>第三变量同时关联暴露与结局</td></tr>
+<tr><td>selection bias</td><td>选择偏倚</td><td>样本不代表目标人群</td></tr>
+<tr><td>information bias</td><td>信息偏倚</td><td>测量/回忆/分类错误</td></tr>
+<tr><td>confounder/mediator</td><td>混杂因素/中介变量</td><td>因果结构中的不同角色</td></tr>
+<tr><td>competing risk</td><td>竞争风险</td><td>如肝病研究中非肝死亡</td></tr>
+<tr><td>regression dilution</td><td>回归稀释偏倚</td><td>单次测量误差导致的效应低估</td></tr>
+<tr><td>population attributable fraction (PAF)</td><td>人群归因分数</td><td>消除暴露可预防的比例</td></tr>
+<tr><td>AUROC</td><td>受试者工作特征曲线下面积</td><td>诊断/预测性能（0.5随机，1.0完美）</td></tr>
+<tr><td>sensitivity / specificity</td><td>敏感度 / 特异度</td><td>真阳性率 / 真阴性率</td></tr>
+<tr><td>positive/negative predictive value</td><td>阳性/阴性预测值（PPV/NPV）</td><td>受患病率影响</td></tr>
+<tr><td>calibration</td><td>校准</td><td>预测概率与观测频率的一致性</td></tr>
+</table>
+<h3>病毒性肝炎</h3>
+<table>
+<tr><th>英文</th><th>中文（官方/通行译法）</th><th>说明</th></tr>
+<tr><td>HBsAg</td><td>乙肝表面抗原</td><td>现症感染标记</td></tr>
+<tr><td>HBsAb / HBcAb</td><td>表面抗体 / 核心抗体</td><td>免疫/既往感染标记</td></tr>
+<tr><td>HBeAg</td><td>e抗原</td><td>病毒活跃复制标记</td></tr>
+<tr><td>HBV DNA</td><td>乙肝病毒载量</td><td>复制与传染性直接指标</td></tr>
+<tr><td>chronic hepatitis B (CHB)</td><td>慢性乙型肝炎</td><td>HBsAg阳性≥6个月+肝脏炎症</td></tr>
+<tr><td>hepatitis B immune globulin (HBIG)</td><td>乙肝免疫球蛋白</td><td>母婴阻断/暴露后预防</td></tr>
+<tr><td>HCV RNA</td><td>丙肝病毒载量</td><td>现症感染确认</td></tr>
+<tr><td>anti-HCV</td><td>丙肝抗体</td><td>筛查标记（不区分现症/既往）</td></tr>
+<tr><td>direct-acting antiviral (DAA)</td><td>直接抗病毒药物</td><td>丙肝治愈性治疗</td></tr>
+<tr><td>sustained virologic response (SVR12)</td><td>持续病毒学应答</td><td>治疗结束后12周RNA不可测≈治愈</td></tr>
+<tr><td>hepatocellular carcinoma (HCC)</td><td>肝细胞癌</td><td>肝癌最主要病理类型</td></tr>
+<tr><td>cirrhosis</td><td>肝硬化</td><td>弥漫纤维化+结节+结构破坏</td></tr>
+<tr><td>decompensation</td><td>失代偿</td><td>腹水/出血/脑病/黄疸</td></tr>
+<tr><td>METAVIR / Ishak / Scheuer</td><td>肝纤维化组织学分期系统</td><td>F0–F4 / 0–6 / 0–4</td></tr>
+<tr><td>seroepidemiological survey</td><td>血清流行病学调查</td><td>全国HBsAg调查即此类</td></tr>
+</table>
+<h3>无创评估与代谢性肝病</h3>
+<table>
+<tr><th>英文</th><th>中文（官方/通行译法）</th><th>说明</th></tr>
+<tr><td>non-invasive test (NIT)</td><td>无创评估工具</td><td>替代肝活检的纤维化测量</td></tr>
+<tr><td>FIB-4 index</td><td>FIB-4指数（纤维化-4指数）</td><td>年龄×AST/(PLT×√ALT)；&lt;1.3排除、&gt;2.67提示进展期纤维化</td></tr>
+<tr><td>APRI</td><td>AST/血小板比值指数</td><td>(AST/ULN)×100/PLT</td></tr>
+<tr><td>NAFLD fibrosis score (NFS)</td><td>NAFLD纤维化评分</td><td>含年龄/BMI/血糖/AST-ALT/PLT/白蛋白</td></tr>
+<tr><td>liver stiffness measurement (LSM)</td><td>肝脏硬度测量</td><td>弹性成像输出，单位kPa</td></tr>
+<tr><td>transient elastography (TE)</td><td>瞬时弹性成像（FibroScan）</td><td>VCTE原理，床旁可测</td></tr>
+<tr><td>controlled attenuation parameter (CAP)</td><td>受控衰减参数</td><td>FibroScan脂肪定量，dB/m</td></tr>
+<tr><td>2D shear wave elastography (2D-SWE)</td><td>二维剪切波弹性成像</td><td>超声设备集成</td></tr>
+<tr><td>ARFI</td><td>声辐射力脉冲成像</td><td>点剪切波弹性成像</td></tr>
+<tr><td>magnetic resonance elastography (MRE)</td><td>磁共振弹性成像</td><td>全肝覆盖、准确性最高</td></tr>
+<tr><td>MRI-PDFF</td><td>磁共振质子密度脂肪分数</td><td>脂肪定量金标准技术</td></tr>
+<tr><td>enhanced liver fibrosis (ELF)</td><td>增强肝纤维化评分</td><td>HA+PIIINP+TIMP-1</td></tr>
+<tr><td>indeterminate zone</td><td>灰色地带</td><td>如FIB-4 1.3–2.67，需二线检测</td></tr>
+<tr><td>steatotic liver disease (SLD)</td><td>脂肪性肝病（总称）</td><td>2023年后术语体系</td></tr>
+<tr><td>MASLD</td><td>代谢相关脂肪性肝病</td><td>原NAFLD；需代谢危险因素</td></tr>
+<tr><td>MASH</td><td>代谢相关脂肪性肝炎</td><td>原NASH；需组织学</td></tr>
+<tr><td>MetALD</td><td>代谢与酒精共存性肝病</td><td>MASLD+酒精暴露</td></tr>
+<tr><td>alcoholic liver disease (ALD)</td><td>酒精性肝病</td><td>酒精归因肝损伤谱</td></tr>
+<tr><td>PNPLA3</td><td>patatin样磷脂酶3</td><td>I148M变体：脂肪肝/肝癌风险基因</td></tr>
+</table>
+
+<h2 class="sec" id="s3-2">3.2 研究起步路线图<span class="chk" data-sec="s3-2">□ 已学</span></h2>
+<div class="flow">
+  <span class="node r">① 定题</span><span class="arr">→</span>
+  <span class="node">② 综述与假设</span><span class="arr">→</span>
+  <span class="node a">③ 设计/数据源</span><span class="arr">→</span>
+  <span class="node t">④ 定义与样本量</span><span class="arr">→</span>
+  <span class="node">⑤ 分析与预注册</span><span class="arr">→</span>
+  <span class="node">⑥ 报告与复现</span>
+</div>
+<ol>
+  <li><b>定题</b>：从"负担—危险因素—自然史—干预—实施"五类问题中选一个可操作的具体问题（PICO）；优先考虑有数据可及的（CKB、UKB、医院队列、EHR）。</li>
+  <li><b>综述</b>：从本库参考文献出发，系统检索PubMed/CNKI，明确既有证据缺口（research gap）——博士论文的"创新点"从这里来。</li>
+  <li><b>设计</b>：横断面（患病率/PAF）、队列（风险预测/自然史）、巢式病例对照（罕见结局）、MR（因果）、EHR（真实世界）。</li>
+  <li><b>定义先行</b>：暴露与结局的操作性定义（尤其是纤维化/NITs定义、肝硬化定义、肝癌定义）写进方案；估算样本量与检验效能。</li>
+  <li><b>分析计划</b>：预先规定主分析、敏感性分析、竞争风险/轨迹等进阶方法；能预注册就预注册（临床注册/开放科学框架）。</li>
+  <li><b>报告</b>：STROBE（观察性）/STARD（诊断准确性）/TRIPOD（预测模型）；公开代码与数据（可复现性）。</li>
+</ol>
+
+<h2 class="sec" id="s3-3">3.3 参考文献与来源<span class="chk" data-sec="s3-3">□ 已学</span></h2>
+<p class="note-src">说明：本库数据均标注来源与年份；数字引用于正文，写作时请回到原始文献核验口径。链接为官方或出版方页面。</p>
+<ol class="ref">
+  <li><b>WHO. Global Hepatitis Report 2026（2024年数据）</b>（慢性HBV 2.4亿、HCV 4700万等）。官方新闻稿：<a href="https://www.who.int/zh/news/item/28-04-2026-efforts-to-eliminate-hepatitis-delivers-gains-but-more-action-needed-to-meet-2030-targets">WHO中文新闻稿</a>；报告页：<a href="https://reliefweb.int/report/world/global-hepatitis-report-2026">Global Hepatitis Report 2026</a></li>
+  <li><b>WHO. Global Hepatitis Report 2024（2022年数据）</b>。WHO官网。</li>
+  <li><b>中国疾病预防控制中心·病毒性肝炎专栏</b>（四次全国血清学调查数据）。<a href="https://www.chinacdc.cn/jkyj/mygh02/ymkyfjb/yxgy/">中国CDC病毒性肝炎专栏</a></li>
+  <li><b>中华医学会感染病学分会. 慢性乙型肝炎防治指南(2019年版)</b>（TE界值9.1/12.4/21.3 kPa等）。<a href="https://medphy.yiigle.com/uploads/guide_html/%E6%85%A2%E6%80%A7%E4%B9%99%E5%9E%8B%E8%82%9D%E7%82%8E%E9%98%B2%E6%B2%BB%E6%8C%87%E5%8D%97%EF%BC%882019%E5%B9%B4%E7%89%88%EF%BC%89.html">指南全文（中华医学杂志社）</a></li>
+  <li><b>IARC. GLOBOCAN 2022</b>；《中国及全球肝癌流行特征分析》。<a href="https://rs.yiigle.com/cmaid/1575655">中华医学期刊</a></li>
+  <li><b>国家卫生健康委等. 消除丙型肝炎公共卫生危害行动工作方案(2021–2030年)</b>。国家卫健委官网发布。</li>
+  <li><b>国家疾控局等9部门. 中国防治病毒性肝炎行动计划(2025–2030年)</b>（2025年9月发布）。国家疾控局官网。</li>
+  <li><b>Rinella ME et al. AASLD/EASL/ALPA Delphi. MASLD更名共识（2023）</b>。J Hepatol/Hepatology。</li>
+  <li><b>第四次全国血清学调查论文（2020年数据）</b>。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11419793/">PMC11419793</a></li>
+  <li><b>Sterling RK et al. FIB-4（2006）</b>. Clin Gastroenterol Hepatol 2006;4(4):426–430.</li>
+  <li><b>Wai CT et al. APRI（2003）</b>. Hepatology 2003;38(2):518–526.</li>
+  <li><b>Angulo P et al. NAFLD Fibrosis Score（2007）</b>. Hepatology 2007;45(4):846–854.</li>
+  <li><b>瞬时弹性成像技术诊断肝纤维化专家共识（2018年更新版）</b>。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12869178/">PMC12869178（全文PDF）</a></li>
+  <li><b>中国超声弹性成像技术诊断肝硬化门静脉高压专家共识(2023版)</b>。中华医学杂志。<a href="https://rs.yiigle.com/cmaid/1471560">中华医学期刊</a></li>
+  <li><b>AGA Clinical Practice Update：NAFLD风险分层与FIB-4筛查（2021）</b>。<a href="https://www.pinnacleresearch.com/wp-content/uploads/2022/08/AGA-Risk-Stratification-and-Endocrine-NAFLD-Guidance.pdf">AGA Guidance（PDF）</a></li>
+  <li><b>MASLD中无创纤维化评估综述</b>（FIB-4界值与局限）。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12865416/">PMC12865416</a>；另见 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7945957/">PMC7945957</a>（NITs准确性表）</li>
+  <li><b>TE用于肝纤维化诊断的专家评审（CHB AUROC）</b>。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4521263/">PMC4521263</a></li>
+  <li><b>社区MASLD的FIB-4与TE危险分层应用</b>。临床肝胆病杂志。<a href="https://www.lcgdbzz.com/cn/article/doi/10.12449/JCH260610">JCH260610</a></li>
+  <li><b>WHO. Guidelines for HBV（2018）/ HCV（2014）</b>（APRI推荐、CHC的LSM界值7–8.5 kPa）。WHO官网。</li>
+  <li><b>FDA批准瑞美替罗（resmetirom，2024年3月）</b>。FDA官网新闻。</li>
+  <li><b>中国慢性病前瞻性研究（CKB）</b>。项目官网/论文（50万人队列+生物样本）。</li>
+  <li><b>UK Biobank</b>。官网：ukbiobank.ac.uk。</li>
+</ol>
+
+<h2 class="sec" id="s3-4">3.4 更新日志<span class="chk" data-sec="s3-4">□ 已学</span></h2>
+<table>
+  <tr><th>版本</th><th>日期</th><th>更新内容</th></tr>
+  <tr><td>v2.0</td><td>2026-09-15</td><td>受众升级为<b>博士快速入门</b>：新增<b>2.7 无创评估工具（NITs）详解</b>（FIB-4/APRI/NFS/TE/ARFI/MRE的公式、界值表、性能、混杂与测量学、流行病学应用场景、诊断准确性方法学、研究checklist）；2.10新增"方法学进阶清单"（竞争风险/MR/多状态/轨迹/测量误差校正/校准验证）；术语表扩充无创评估与MASLD词条；数据更新至WHO 2026全球肝炎报告等最新来源；更新日志接入。</td></tr>
+  <tr><td>v1.0</td><td>2026-09-13</td><td>初始版本：传染病流行病学基础+肝病流行病学+工具延伸；批注/进度/检索/导出导入功能上线。</td></tr>
+</table>
+</article>
+</main>
+</div>
+
+<div class="tools">
+  <button class="btn" onclick="document.getElementById('panel').classList.toggle('on')">📝 批注 (<span id="badgeCnt">0</span>)</button>
+  <button class="btn" onclick="exportData()">⬇ 导出批注</button>
+  <button class="btn" onclick="document.getElementById('importFile').click()">⬆ 导入批注</button>
+  <button class="btn" onclick="clearAll()">🗑 清空批注</button>
+  <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 顶部</button>
+  <input type="file" id="importFile" accept=".json,application/json" style="display:none">
+</div>
+<div id="selbar">➕ 添加批注</div>
+
+<div id="modal">
+  <div class="card">
+    <h3>添加 / 编辑批注</h3>
+    <div class="q" id="mq"></div>
+    <div class="cols">
+      <div class="col on" style="background:#ffe89c">黄</div>
+      <div class="col" style="background:#b8e6cf">绿</div>
+      <div class="col" style="background:#cfe3fb">蓝</div>
+      <div class="col" style="background:#f8c9d4">粉</div>
+    </div>
+    <textarea id="mnote" placeholder="写下你的笔记（可选，会保存在本浏览器中）"></textarea>
+    <div class="btns">
+      <button class="cancel" onclick="document.getElementById('modal').style.display='none'">取消</button>
+      <button class="save" onclick="doSave()">保存批注</button>
+    </div>
+  </div>
+</div>
+
+<div id="panel">
+  <div class="ph"><span>我的批注</span><button onclick="this.parentElement.parentElement.classList.remove('on')">✕</button></div>
+  <div class="pl" id="panelList"></div>
+</div>
+
+<div id="popover">
+  <div class="ps" id="popSec"></div>
+  <div class="pq" id="popQ"></div>
+  <div class="pn" id="popNote"></div>
+  <div class="pops">
+    <button onclick="editAnno()">编辑</button>
+    <button onclick="delAnno()">删除</button>
+    <button onclick="document.getElementById('popover').style.display='none'">关闭</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<footer>传染病与肝病流行病学知识库 · v2.0（博士快速入门版）· 数据来源见 3.3 · 批注与进度保存在本浏览器本地</footer>
+
+<script>
+(function(){
+'use strict';
+var LS='epi_kb_v2';
+var marksKey=LS+'_marks';
+var progKey=LS+'_progress';
+var marks=[],curId=null,editing='new';
+var selBar=document.getElementById('selbar');
+var modal=document.getElementById('modal');
+var cols=modal.querySelectorAll('.col');
+var toastEl=document.getElementById('toast');
+
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+function load(){try{return JSON.parse(localStorage.getItem(marksKey))||[]}catch(e){return[]}}
+function save(){try{localStorage.setItem(marksKey,JSON.stringify(marks))}catch(e){}}
+function loadProg(){try{return JSON.parse(localStorage.getItem(progKey))||{}}catch(e){return{}}}
+function saveProg(p){try{localStorage.setItem(progKey,JSON.stringify(p))}catch(e){}}
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('on');clearTimeout(toastEl._t);toastEl._t=setTimeout(function(){toastEl.classList.remove('on')},1800)}
+
+/* 文本节点所属章节：最后一个位于该文本之前的 h2（修复版逻辑） */
+function sectionOf(tn){
+  var hs=document.querySelectorAll('#content h2');
+  var cur=null;
+  for(var i=0;i<hs.length;i++){
+    if((tn.compareDocumentPosition(hs[i]) & Node.DOCUMENT_POSITION_FOLLOWING)!==0){return cur}
+    cur={id:hs[i].id,title:hs[i].textContent.replace(/[□✔]\s*已学/,'').trim()};
+  }
+  return cur;
+}
+function firstTextNode(n){
+  if(!n)return null;
+  if(n.nodeType===3)return n;
+  var w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT,null,false);
+  return w.nextNode();
+}
+function locate(m){
+  var scope=document.getElementById('content');
+  var w=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,null,false);
+  var n;
+  while((n=w.nextNode())){
+    var sec=sectionOf(n);
+    if(m.sec&&sec&&sec.id!==m.sec)continue;
+    var idx=n.nodeValue.indexOf(m.q);
+    if(idx>=0)return{node:n,idx:idx};
+  }
+  return null;
+}
+function wrapMark(m,loc){
+  try{
+    var r=document.createRange();
+    r.setStart(loc.node,loc.idx);r.setEnd(loc.node,loc.idx+m.q.length);
+    var span=document.createElement('span');
+    span.className='mark c'+m.color;span.dataset.id=m.id;span.title='点击查看批注';
+    r.surroundContents(span);
+    span.addEventListener('click',function(ev){ev.preventDefault();openPop(ev.currentTarget)});
+  }catch(e){}
+}
+function applyAllMarks(){
+  marks=load();
+  updateBadge();renderPanel();refreshProgress();
+  marks.forEach(function(m){
+    var loc=locate(m);
+    if(loc)wrapMark(m,loc);
+  });
+}
+
+/* 选中 → 浮动条 */
+document.addEventListener('mouseup',function(){
+  setTimeout(function(){
+    var sel=window.getSelection();
+    if(!sel||sel.isCollapsed||!sel.toString().trim()){selBar.style.display='none';return}
+    var r=sel.getRangeAt(0).getBoundingClientRect();
+    selBar.style.display='block';
+    selBar.style.left=Math.min(window.innerWidth-190,Math.max(4,r.left+r.width/2-60))+'px';
+    selBar.style.top=(r.top-48<4?r.bottom+8:r.top-48)+'px';
+  },10);
+});
+document.addEventListener('mousedown',function(e){
+  if(selBar.contains(e.target)||modal.contains(e.target))return;
+  selBar.style.display='none';
+});
+selBar.addEventListener('click',function(){
+  var sel=window.getSelection();
+  if(!sel||sel.isCollapsed){return}
+  var q=sel.toString().trim();
+  if(!q){return}
+  curId='m'+Date.now().toString(36)+Math.floor(Math.random()*1e6).toString(36);
+  document.getElementById('mq').textContent=q;
+  for(var i=0;i<cols.length;i++){cols[i].classList.remove('on')}
+  cols[0].classList.add('on');
+  document.getElementById('mnote').value='';
+  editing='new';
+  modal.style.display='flex';
+  selBar.style.display='none';
+});
+
+/* 颜色选择 */
+for(var ci=0;ci<cols.length;ci++){
+  (function(el){el.addEventListener('click',function(){
+    for(var j=0;j<cols.length;j++){cols[j].classList.remove('on')}
+    el.classList.add('on');
+  })})(cols[ci]);
+}
+function currentColor(){for(var j=0;j<cols.length;j++){if(cols[j].classList.contains('on'))return j+1}return 1}
+
+window.doSave=function(){
+  var sel=window.getSelection();
+  if(!sel||sel.isCollapsed){modal.style.display='none';return}
+  var q=document.getElementById('mq').textContent;
+  var note=document.getElementById('mnote').value.trim();
+  var color=currentColor();
+  var range=sel.getRangeAt(0);
+  var start=firstTextNode(range.startContainer)||range.startContainer;
+  var sec=sectionOf(start)||{id:'',title:''};
+  if(editing==='edit'&&curId){
+    for(var k=0;k<marks.length;k++){
+      if(marks[k].id===curId){marks[k].note=note;marks[k].color=color;break}
+    }
+    var el=document.querySelector('[data-id="'+curId+'"]');
+    if(el){el.className='mark c'+color}
+  }else{
+    var mark={id:curId,q:q,note:note,color:color,sec:sec.id,secTitle:sec.title,date:new Date().toISOString().slice(0,10)};
+    marks.push(mark);
+    var loc=locate(mark);
+    if(loc)wrapMark(mark,loc);
+  }
+  save();updateBadge();renderPanel();
+  modal.style.display='none';
+  if(sel&&sel.removeAllRanges){sel.removeAllRanges()}
+  toast('批注已保存');
+};
+
+/* 批注面板 */
+function renderPanel(){
+  var pl=document.getElementById('panelList');
+  if(!marks.length){pl.innerHTML='<div style="color:#8a97a5;font-size:13px;text-align:center;margin-top:30px">还没有批注。<br>选中正文文字即可添加。</div>';return}
+  pl.innerHTML=marks.map(function(m){
+    return '<div class="anno-item" data-pid="'+esc(m.id)+'">'+
+      '<div class="sec">'+esc(m.secTitle||m.sec||'')+' · '+esc(m.date||'')+'</div>'+
+      '<div class="q">'+esc(m.q)+'</div>'+
+      '<div class="note">'+(m.note?esc(m.note):'<span style="color:#9aa6b2">（无笔记）</span>')+'</div>'+
+      '<div class="ops"><button onclick="window.gotoAnno(\''+esc(m.id)+'\')">定位</button>'+
+      '<button onclick="window.editById(\''+esc(m.id)+'\')">编辑</button>'+
+      '<button onclick="window.delById(\''+esc(m.id)+'\')">删除</button></div></div>';
+  }).join('');
+}
+window.gotoAnno=function(id){
+  var el=document.querySelector('[data-id="'+id+'"]');
+  if(el){el.scrollIntoView({behavior:'smooth',block:'center'})}
+};
+window.editById=function(id){
+  var m=null;
+  for(var i=0;i<marks.length;i++){if(marks[i].id===id){m=marks[i];break}}
+  if(!m)return;
+  curId=id;editing='edit';
+  document.getElementById('mq').textContent=m.q;
+  document.getElementById('mnote').value=m.note||'';
+  for(var j=0;j<cols.length;j++){cols[j].classList.toggle('on',(j+1)===m.color)}
+  modal.style.display='flex';
+};
+window.delById=function(id){
+  if(!confirm('删除这条批注？'))return;
+  var span=document.querySelector('[data-id="'+id+'"]');
+  if(span&&span.parentNode){
+    var txt=document.createTextNode(span.textContent);
+    span.parentNode.replaceChild(txt,span);
+  }
+  marks=marks.filter(function(m){return m.id!==id});
+  save();updateBadge();renderPanel();
+  toast('已删除');
+};
+
+/* 气泡 */
+function openPop(el){
+  var m=null;
+  for(var i=0;i<marks.length;i++){if(marks[i].id===el.dataset.id){m=marks[i];break}}
+  if(!m)return;
+  document.getElementById('popSec').textContent=(m.secTitle||'')+' · '+(m.date||'');
+  document.getElementById('popQ').textContent=m.q;
+  document.getElementById('popNote').textContent=m.note||'（无笔记）';
+  var r=el.getBoundingClientRect();
+  var p=document.getElementById('popover');
+  p.style.display='block';
+  var x=Math.min(window.innerWidth-p.offsetWidth-8,Math.max(8,r.left));
+  var y=(r.bottom+p.offsetHeight>window.innerHeight?r.top-p.offsetHeight-6:r.bottom+6);
+  p.style.left=x+'px';p.style.top=Math.max(6,y)+'px';
+}
+window.editAnno=function(){
+  var p=document.getElementById('popover');
+  var id=p.dataset.pid;
+  document.getElementById('popover').style.display='none';
+  if(id)window.editById(id);
+};
+window.delAnno=function(){
+  var id=document.getElementById('popover').dataset.pid;
+  document.getElementById('popover').style.display='none';
+  if(id)window.delById(id);
+};
+document.addEventListener('mouseup',function(e){
+  var p=document.getElementById('popover');
+  if(p.style.display==='block'&&!p.contains(e.target)){
+    var m=document.querySelectorAll('.mark');
+    var inside=false;
+    for(var i=0;i<m.length;i++){if(m[i]===e.target||m[i].contains(e.target)){inside=true;break}}
+    if(!inside)p.style.display='none';
+  }
+});
+
+/* 徽标与导出导入 */
+function updateBadge(){document.getElementById('badgeCnt').textContent=marks.length}
+window.exportData=function(){
+  var data={v:2,exported:new Date().toISOString(),marks:marks,progress:loadProg()};
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='知识库批注备份.json';
+  document.body.appendChild(a);a.click();a.remove();
+  toast('批注已导出');
+};
+document.getElementById('importFile').addEventListener('change',function(ev){
+  var f=ev.target.files[0];
+  if(!f)return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{
+      var d=JSON.parse(rd.result);
+      if(!d||!Array.isArray(d.marks)){toast('文件格式不对');return}
+      marks=marks.concat(d.marks);
+      save();
+      var p=loadProg();
+      if(d.progress){for(var k in d.progress){p[k]=d.progress[k]}}
+      saveProg(p);
+      applyAllMarks();
+      toast('导入成功：'+(d.marks.length)+'条批注');
+    }catch(e){toast('导入失败：文件无法解析')}
+  };
+  rd.readAsText(f);
+  ev.target.value='';
+});
+window.clearAll=function(){
+  if(!marks.length){toast('还没有批注');return}
+  if(!confirm('清空全部批注？此操作不可恢复（可先导出备份）'))return;
+  document.querySelectorAll('.mark').forEach(function(sp){
+    var txt=document.createTextNode(sp.textContent);
+    sp.parentNode.replaceChild(txt,sp);
+  });
+  marks=[];
+  save();updateBadge();renderPanel();
+  toast('已清空');
+};
+
+/* 学习进度 */
+function refreshProgress(){
+  var p=loadProg();
+  var chks=document.querySelectorAll('.chk');
+  var done=0;
+  chks.forEach(function(c){
+    var on=!!p[c.dataset.sec];
+    if(on){c.textContent='✔ 已学';c.classList.add('done');done++}
+    else{c.textContent='□ 已学';c.classList.remove('done')}
+  });
+  document.getElementById('progNow').textContent=done;
+  document.getElementById('progAll').textContent=chks.length;
+  document.getElementById('progPct').textContent='('+Math.round(done/chks.length*100)+'%)';
+}
+document.addEventListener('click',function(e){
+  if(e.target.classList&&e.target.classList.contains('chk')){
+    var p=loadProg();
+    var id=e.target.dataset.sec;
+    p[id]=!p[id];
+    saveProg(p);
+    refreshProgress();
+  }
+});
+
+/* 目录筛选 */
+window.filterToc=function(v){
+  v=(v||'').toLowerCase().trim();
+  var lis=document.querySelectorAll('#tocList li');
+  lis.forEach(function(li){
+    if(li.classList.contains('grp')){li.style.display='';return}
+    var a=li.querySelector('a');
+    if(!a)return;
+    var show=!v||a.textContent.toLowerCase().indexOf(v)>-1;
+    li.style.display=show?'':'none';
+  });
+};
+
+/* 滚动高亮 */
+var tocLinks=[].slice.call(document.querySelectorAll('#tocList li a'));
+function onScroll(){
+  var y=window.scrollY||document.documentElement.scrollTop;
+  var cur=null;
+  var hs=document.querySelectorAll('#content h2');
+  for(var i=0;i<hs.length;i++){
+    if(hs[i].getBoundingClientRect().top<=90){cur=hs[i]}
+  }
+  tocLinks.forEach(function(a){a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id)});
+}
+window.addEventListener('scroll',function(){requestAnimationFrame(onScroll)},{passive:true});
+
+applyAllMarks();
+onScroll();
+})();
+</script>
+</body>
+</html>
